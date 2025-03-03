@@ -1,40 +1,17 @@
-# Let's create a virtual bartender that serves you if you are of legal age
+# you have 3 lives. I roll the dice. If I roll 6, you win
+# If not a 6, you lose 1 life.
 
-from random import choice
-drinks= ["wiskey", "rum", "tequila", "gin", "sake", "wine", "beer", "vodka", "champagne", "cognac"]
-mixers= ["fanta", "fanta limon", "red bull", "tonic", "cola", "soda"]
+from random import randint
 
-# print(f"{choice(drinks)} {choice(mixers)}")
-print("I am the virtual bartender, welcome to my humble bar")
-name = input("How should I call you?")
-try:
-    age= input("How old are you")
-    age= int(age) #this is where you can have problems
-    legal= None
-    country= input("Where are you from?")
-    if age < 14:
-        legal= False
-    elif age < 16:
-        if country == "Austria":
-            legal= True
-        else:
-            legal= False
-    elif age < 18:
-        if country == "Austria" or country== "Luxemburg":
-            legal= True
-        else:
-            legal= False
-    elif age < 21:
-        if country== "USA" or country== "UAE":
-            legal = False
-        else:
-            legal = True
-    else: #for age greater than 21
-        legal= True
-    if legal:
-        print(f"{choice(drinks)} {choice(mixers)}")
-    else:
-        print(f"I can only serve you {choice(mixers)}")
-
-except ValueError:
-    print("I dont have time for your games! Get out!")
+lives = 3
+while lives:
+    roll = randint(1, 6) # make sure to not put a: and b:!!
+    if roll == 6:
+        print("You rolled a 6! You win!")
+        break # this exists the while even if lives still > 0
+    # there is no other way to get here, unless i DID NOT roll a 6
+    print(f"You rolled a {roll}! You lose a life")
+    lives -= 1
+    print(f"Lives left: {lives}")
+else: # else from while!!
+    print("You lost!")
